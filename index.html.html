@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Forgiveness Adventure! 💖</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(to bottom, #ff9a9e, #fecfef);
+            color: #333;
+            text-align: center;
+            padding: 20px;
+            margin: 0;
+        }
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 15px;
+            padding: 20px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+        h1, h2 {
+            color: #e91e63;
+        }
+        .question {
+            margin: 20px 0;
+        }
+        .options {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+        .option {
+            background: #ffebee;
+            border: 2px solid #f8bbd9;
+            border-radius: 10px;
+            padding: 10px;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+        .option:hover {
+            background: #f8bbd9;
+        }
+        .option.selected {
+            background: #e91e63;
+            color: white;
+        }
+        button {
+            background: #e91e63;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 10px;
+            cursor: pointer;
+            font-size: 16px;
+            margin-top: 20px;
+        }
+        button:hover {
+            background: #c2185b;
+        }
+        .hidden {
+            display: none;
+        }
+        .boom {
+            animation: boom 1s ease-in-out;
+        }
+        @keyframes boom {
+            0% { transform: scale(0.5); opacity: 0; }
+            50% { transform: scale(1.2); }
+            100% { transform: scale(1); opacity: 1; }
+        }
+        .emoji {
+            font-size: 2em;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🌟 Forgiveness Adventure! 🌟</h1>
+        <p>Hey bestie! Let's play a game to unlock the ultimate apology. Answer these cute questions, and prepare for a surprise! 😘</p>
+
+        <div id="question1" class="question">
+            <h2>Question 1: What's your go-to snack when you're "mad" at me? 🍪</h2>
+            <div class="options">
+                <div class="option" data-value="cookies">Cookies – because I'm sweet like that!</div>
+                <div class="option" data-value="chips">Chips – crunchy and dramatic, just like our fights!</div>
+                <div class="option" data-value="icecream">Ice cream – to cool down that hot temper! ❄️</div>
+            </div>
+        </div>
+
+        <div id="question2" class="question hidden">
+            <h2>Question 2: If I were a superhero, what power would I have to annoy you the most? 🦸‍♀️</h2>
+            <div class="options">
+                <div class="option" data-value="teleport">Teleportation – popping up everywhere you go!</div>
+                <div class="option" data-value="mindread">Mind reading – knowing your secrets (like how much you love my hugs)!</div>
+                <div class="option" data-value="invisibility">Invisibility – sneaking into your fridge for snacks! 🍔</div>
+            </div>
+        </div>
+
+        <div id="question3" class="question hidden">
+            <h2>Question 3: On a scale of 1-10, how annoying am I right now? (Pick wisely!) 😉</h2>
+            <div class="options">
+                <div class="option" data-value="1">1 – Too cute to be mad at!</div>
+                <div class="option" data-value="5">5 – Annoyingly adorable!</div>
+                <div class="option" data-value="10">10 – You're stuck with me forever! 💕</div>
+            </div>
+        </div>
+
+        <div id="apology" class="hidden">
+            <h2 class="boom">BOOM! 💥 The Ultimate Apology! 💥</h2>
+            <p class="emoji">😢❤️</p>
+            <p>I'm so sorry for the arguments and issues we've had. I know I've been a pain, and it won't happen again – I promise to listen better and be more understanding.</p>
+            <p>You're my best friend, and I'll always be here to understand you, no matter what. Even if I'm annoying sometimes! 😜</p>
+            <p>Forgive me? Let's hug it out! 🤗</p>
+        </div>
+
+        <button id="nextBtn">Next Question! ➡️</button>
+    </div>
+
+    <script>
+        let currentQuestion = 1;
+        const totalQuestions = 3;
+        const nextBtn = document.getElementById('nextBtn');
+        let selectedOption = null;
+
+        // Function to handle option selection
+        document.querySelectorAll('.option').forEach(option => {
+            option.addEventListener('click', () => {
+                // Remove previous selection
+                document.querySelectorAll('.option').forEach(opt => opt.classList.remove('selected'));
+                // Select this one
+                option.classList.add('selected');
+                selectedOption = option.dataset.value;
+            });
+        });
+
+        // Next button logic
+        nextBtn.addEventListener('click', () => {
+            if (!selectedOption) {
+                alert('Pick an option first, silly! 😏');
+                return;
+            }
+
+            // Hide current question
+            document.getElementById(`question${currentQuestion}`).classList.add('hidden');
+
+            currentQuestion++;
+
+            if (currentQuestion <= totalQuestions) {
+                // Show next question
+                document.getElementById(`question${currentQuestion}`).classList.remove('hidden');
+                selectedOption = null; // Reset for next
+            } else {
+                // Show apology
+                document.getElementById('apology').classList.remove('hidden');
+                nextBtn.style.display = 'none'; // Hide button
+            }
+        });
+    </script>
+</body>
+</html>
